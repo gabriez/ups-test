@@ -112,6 +112,11 @@ export default class UPSService implements CarrierService {
       throw new Error(`Error fetching UPS rate: ${data.response.errors.map((err) => err.message).join(", ")}`);
     }
 
+    if (status !== 200) {
+      console.log(`Unexpected status code ${status.toString()} while fetching UPS rate:`, data);
+      return { errors: [`Unexpected status code ${status.toString()} while fetching UPS rate`], statusCode: status };
+    }
+
     if (data.RateResponse.RatedShipment.length === 0) {
       return { errors: ["No rated shipments found in UPS response"], statusCode: 404 };
     }

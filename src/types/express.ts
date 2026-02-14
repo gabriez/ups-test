@@ -23,6 +23,13 @@ export interface ResponseAPI<T = unknown> extends TypedResponse<{
   status: boolean;
 }> {}
 
+export interface ResponseFromApi<T> {
+  data?: T;
+  errors?: string[];
+  message: string;
+  status: boolean;
+}
+
 export interface TypedResponse<ResBody> extends Response {
   json: Send<ResBody, this>;
 }

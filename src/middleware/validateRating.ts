@@ -74,9 +74,8 @@ const ratingSchema = zod.object({
 });
 
 export const validateRating = (req: ReqRateValidation, res: ResponseAPI, next: NextFunction) => {
-  const resErr = res.status(422);
   if (!req.body) {
-    resErr.json({
+    res.status(422).json({
       message: "Missing data in request body",
       status: false,
     });
@@ -88,7 +87,7 @@ export const validateRating = (req: ReqRateValidation, res: ResponseAPI, next: N
 
     if (!validationResult.success) {
       const errors = validationResult.error.issues.map((err) => err.message);
-      resErr.json({
+      res.status(422).json({
         errors,
         message: "Validation failed for request body",
         status: false,

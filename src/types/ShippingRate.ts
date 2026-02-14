@@ -1,17 +1,18 @@
-/* eslint-disable perfectionist/sort-enums, perfectionist/sort-modules, perfectionist/sort-interfaces */
+/* eslint-disable perfectionist/sort-modules, perfectionist/sort-interfaces */
 
 import type { MakeOptional } from "#types/utils.js";
 
-import { RequestValidatedAPI, RequestValidationAPI, ResponseAPI } from "./express.js";
+import { RequestValidatedAPI, RequestValidationAPI, ResponseAPI, ResponseFromApi } from "./express.js";
 
-export enum UnitOfMeasurementEnumDimensions {
-  CM = "CM",
-  IN = "IN",
-}
-export enum UnitOfMeasurementEnumWeight {
-  LBS = "LBS",
-  KGS = "KGS",
-  OZS = "OZS",
+export type UnitOfMeasurementEnumDimensions = "CM" | "IN";
+export type UnitOfMeasurementEnumWeight = "KGS" | "LBS" | "OZS";
+
+export interface Addresses {
+  AddressLine: string[];
+  City?: string;
+  CountryCode: string;
+  PostalCode?: string;
+  StateProvinceCode?: string;
 }
 
 export interface Addresses {
@@ -72,6 +73,8 @@ export function isNormalizedRate(rate: unknown): rate is NormalizedRate {
 }
 
 export type ResRate = ResponseAPI<NormalizedRate>;
+
+export type ResRateFromApi = ResponseFromApi<NormalizedRate>;
 
 export interface RateResponseAPI {
   RateResponse: RateResponse;

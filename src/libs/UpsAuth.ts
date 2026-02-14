@@ -70,6 +70,7 @@ export class UpsAuth {
     const issuedAt = parseInt(this.credentials.issued_at, 10);
     const expiresIn = parseInt(this.credentials.expires_in, 10);
     const currentTime = Math.floor(Date.now() / 1000);
+
     return currentTime >= issuedAt + expiresIn - 60; // Refresh token 1 minute before expiration
   }
 }
